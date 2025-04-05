@@ -1,0 +1,177 @@
+﻿@model LuxeCart.Models.ProductCategoriesViewModel
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_UserPanelLayoutPage.cshtml";
+}
+@if (TempData["LoginSuccess"] != null)
+{
+    <div class="alert alert-success alert-dismissible fade show position-fixed top-0 start-50 translate-middle-x mt-5 shadow-sm"
+         style="z-index: 1050;" role="alert">
+        <strong>Success!</strong> @TempData["LoginSuccess"]
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+
+    <script>
+        setTimeout(() => {
+            let alertBox = document.querySelector(".alert");
+            if (alertBox) {
+                alertBox.classList.remove("show");
+                alertBox.classList.add("fade");
+                setTimeout(() => alertBox.remove(), 500); // Smooth removal
+            }
+        }, 5000); // Auto-dismiss after 5 seconds
+    </script>
+}
+@if (TempData["SuccessUpdate"] != null)
+{
+    <div class="alert alert-success alert-dismissible fade show position-fixed top-0 start-50 translate-middle-x mt-5 shadow-sm"
+         style="z-index: 1050;" role="alert">
+        <strong>Success!</strong> @TempData["SuccessUpdate"]
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+
+    <script>
+        setTimeout(() => {
+            let alertBox = document.querySelector(".alert");
+            if (alertBox) {
+                alertBox.classList.remove("show");
+                alertBox.classList.add("fade");
+                setTimeout(() => alertBox.remove(), 500); // Smooth removal
+            }
+        }, 5000); // Auto-dismiss after 3 seconds
+    </script>
+}
+
+@if (TempData["ErrorMessage"] != null)
+{
+    <div class="alert alert-warning alert-dismissible fade show position-fixed top-0 start-50 translate-middle-x mt-3 shadow-sm"
+         style="z-index: 1050;" role="alert">
+        @TempData["ErrorMessage"]
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+
+    <script>
+        setTimeout(() => {
+            let alertBox = document.querySelector(".alert");
+            if (alertBox) {
+                alertBox.classList.remove("show");
+                alertBox.classList.add("fade");
+                setTimeout(() => alertBox.remove(), 500); // Smooth removal
+            }
+        }, 5000); // Auto-dismiss after 3 seconds
+    </script>
+}
+
+<main>
+    <!-- Hero Section with Carousel -->
+    <div id="heroCarousel" class="carousel slide" data-bs-ride="carousel">
+        <div class="carousel-indicators">
+            <button type="button" data-bs-target="#heroCarousel" data-bs-slide-to="0" class="active"></button>
+            <button type="button" data-bs-target="#heroCarousel" data-bs-slide-to="1"></button>
+            <button type="button" data-bs-target="#heroCarousel" data-bs-slide-to="2"></button>
+        </div>
+        <div class="carousel-inner">
+            <div class="carousel-item active">
+                <div class="hero py-5" style="background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url('https://images.unsplash.com/photo-1498049794561-7780e7231661?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1200&q=80'); background-size: cover; background-position: center;">
+                    <div class="container text-center">
+                        <h1 class="display-4 text-white">Welcome to LuxeCart</h1>
+                        <p class="lead text-white">Discover amazing electronics at great prices</p>
+                        <a href="#" class="btn btn-light btn-lg">Shop Now</a>
+                    </div>
+                </div>
+            </div>
+            <div class="carousel-item">
+                <div class="hero py-5" style="background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url('https://images.unsplash.com/photo-1445205170230-053b83016050?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1200&q=80'); background-size: cover; background-position: center;">
+                    <div class="container text-center">
+                        <h1 class="display-4 text-white">Fashion Collection</h1>
+                        <p class="lead text-white">Trendy clothing and accessories</p>
+                        <a href="#" class="btn btn-light btn-lg">View Deals</a>
+                    </div>
+                </div>
+            </div>
+            <div class="carousel-item">
+                <div class="hero py-5" style="background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url('https://images.unsplash.com/photo-1618221195710-dd6b41faaea6?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1200&q=80'); background-size: cover; background-position: center;">
+                    <div class="container text-center">
+                        <h1 class="display-4 text-white">Home & Living</h1>
+                        <p class="lead text-white">Transform your living space</p>
+                        <a href="#" class="btn btn-light btn-lg">Explore Now</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <button class="carousel-control-prev" type="button" data-bs-target="#heroCarousel" data-bs-slide="prev">
+            <span class="carousel-control-prev-icon"></span>
+        </button>
+        <button class="carousel-control-next" type="button" data-bs-target="#heroCarousel" data-bs-slide="next">
+            <span class="carousel-control-next-icon"></span>
+        </button>
+    </div>
+
+    <!-- featured products -->
+    <section class="featured-products py-5">
+        <div class="container">
+            <div class="d-flex justify-content-between align-items-center mb-4">
+                <h2>Featured Products</h2>
+                <div class="btn-group">
+                    <a href="@Url.Action("Index", new { filter = "All" })"
+                       class="btn btn-outline-primary @(Model.ActiveFilter == "All" ? "active" : "")">All</a>
+                    <a href="@Url.Action("Index", new { filter = "New Arrivals" })"
+                       class="btn btn-outline-primary @(Model.ActiveFilter == "New Arrivals" ? "active" : "")">New Arrivals</a>
+                    <a href="@Url.Action("Index", new { filter = "Best Sellers" })"
+                       class="btn btn-outline-primary @(Model.ActiveFilter == "Best Sellers" ? "active" : "")">Best Sellers</a>
+                </div>
+            </div>
+
+            <!-- Electronics -->
+            <h3 class="mt-4 border-bottom pb-2">Electronics</h3>
+            <div class="row row-cols-1 row-cols-md-3 g-4">
+                @if (Model.Electronics.Any())
+                {
+                    foreach (var product in Model.Electronics)
+                    {
+                        @Html.Partial("_ProductCard", product)
+                    }
+                }
+                else
+                {
+                    <div class="col text-center text-muted">No electronics products found.</div>
+                }
+            </div>
+
+            <!-- Clothes -->
+            <h3 class="mt-4 border-bottom pb-2">Fashion</h3>
+            <div class="row row-cols-1 row-cols-md-3 g-4">
+                @if (Model.Clothes.Any())
+                {
+                    foreach (var product in Model.Clothes)
+                    {
+                        @Html.Partial("_ProductCard", product)
+                    }
+                }
+                else
+                {
+                    <div class="col text-center text-muted">No clothes products found.</div>
+                }
+            </div>
+
+            <!-- Home and Living -->
+            <h3 class="mt-4 border-bottom pb-2">Home and Living</h3>
+            <div class="row row-cols-1 row-cols-md-3 g-4">
+                @if (Model.HomeAndLiving.Any())
+                {
+                    foreach (var product in Model.HomeAndLiving)
+                    {
+                        @Html.Partial("_ProductCard", product)
+                    }
+                }
+                else
+                {
+                    <div class="col text-center text-muted">No home and living products found.</div>
+                }
+            </div>
+        </div>
+    </section>
+</main>
+
+

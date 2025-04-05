@@ -1,0 +1,98 @@
+﻿@model LuxeCart.Models.ProductDetail
+
+@{
+    ViewBag.Title = "Add Product";
+    Layout = "~/Views/Shared/_AdminPanelLayoutPage.cshtml";
+}
+
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-md-12">
+            <h2 class="mt-4 mb-4">Add Product</h2>
+
+            @if (ViewBag.SuccessMessage != null)
+            {
+                <div class="alert alert-success alert-dismissible fade show" role="alert">
+                    @ViewBag.SuccessMessage
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div>
+            }
+
+            @using (Html.BeginForm("AddProduct", "AdminPanel", FormMethod.Post, new { enctype = "multipart/form-data", @class = "needs-validation", novalidate = "novalidate" }))
+            {
+                <div class="card shadow-sm">
+                    <div class="card-body">
+                        <h5 class="card-title mb-4">Product Details</h5>
+
+                        <!-- Product Name -->
+                        <div class="mb-3">
+                            <label for="ProductName" class="form-label">Product Name</label>
+                            @Html.TextBoxFor(m => m.ProductName, new { @class = "form-control", required = "required", placeholder = "Enter product name" })
+                            <div class="invalid-feedback">Please enter a product name.</div>
+                        </div>
+
+                        <!-- Company Name -->
+                        <div class="mb-3">
+                            <label for="ProductCompany" class="form-label">Company Name</label>
+                            @Html.TextBoxFor(m => m.ProductCompany, new { @class = "form-control", required = "required", placeholder = "Enter company name" })
+                            <div class="invalid-feedback">Please enter a company name.</div>
+                        </div>
+
+                        <!-- Description -->
+                        <div class="mb-3">
+                            <label for="ProductDescription" class="form-label">Description</label>
+                            @Html.TextAreaFor(m => m.ProductDescription, new { @class = "form-control", rows = "3", placeholder = "Enter product description" })
+                        </div>
+
+                        <!-- Price -->
+                        <div class="mb-3">
+                            <label for="ProductPrice" class="form-label">Price</label>
+                            @Html.TextBoxFor(m => m.ProductPrice, new { @class = "form-control", type = "number", step = "0.01", required = "required", placeholder = "Enter price" })
+                            <div class="invalid-feedback">Please enter a valid price.</div>
+                        </div>
+
+                        <!-- Stock Quantity -->
+                        <div class="mb-3">
+                            <label for="ProductQuantity" class="form-label">Stock Quantity</label>
+                            @Html.TextBoxFor(m => m.ProductQuantity, new { @class = "form-control", type = "number", required = "required", placeholder = "Enter stock quantity" })
+                            <div class="invalid-feedback">Please enter a valid stock quantity.</div>
+                        </div>
+
+                        <!-- Product Image -->
+                        <div class="mb-3">
+                            <label for="ProductImageFile" class="form-label">Product Image</label>
+                            <input type="file" name="ProductImageFile" class="form-control" required />
+                            <div class="invalid-feedback">Please upload a product image.</div>
+                        </div>
+
+                        <!-- Category -->
+                        <div class="mb-3">
+                            <label for="CategoryID" class="form-label">Category</label>
+                            @if (ViewBag.Categories != null)
+                            {
+                                @Html.DropDownListFor(m => m.CategoryID, ViewBag.Categories as SelectList, "Select Category", new { @class = "form-select", required = "required" })
+                            }
+                            else
+                            {
+                                <select class="form-select" disabled>
+                                    <option>No categories available</option>
+                                </select>
+                            }
+                            <div class="invalid-feedback">Please select a category.</div>
+                        </div>
+                        <!-- Availability -->
+                        <div class="mb-3 form-check">
+                            @Html.CheckBoxFor(m => m.IsAvailable, new { @class = "form-check-input" })
+                            <label class="form-check-label" for="IsAvailable">Available</label>
+                        </div>
+
+                        <!-- Submit Button -->
+                        <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+                            <button type="submit" class="btn btn-primary">Add Product</button>
+                        </div>
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
+</div>

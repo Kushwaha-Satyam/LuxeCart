@@ -1,0 +1,53 @@
+﻿@model LuxeCart.Models.Product
+
+<div class="col-md-4">
+    <div class="card shadow-sm border-0 rounded-3">
+        <!-- Product Image -->
+        <img src="@(string.IsNullOrEmpty(Model.ProductImageUrl) ? "/images/placeholder.jpg" : Model.ProductImageUrl)" class="card-img-top rounded-top w-100" alt="@Model.ProductName" style="height: 200px; object-fit: contain;">
+
+        <div class="card-body">
+            <!-- Product ID (Hidden) -->
+            <h6 class="visually-hidden">@Model.ProductID</h6>
+
+            <!-- Product Name -->
+            <h5 class="card-title fw-bold">@Model.ProductName</h5>
+
+            <!-- Product Description -->
+            <p class="card-text text-muted small">
+                @(Model.ProductDescription.Length > 100 ? Model.ProductDescription.Substring(0, 100) + "..." : Model.ProductDescription)
+            </p>
+
+            <!-- Product Price -->
+            <p class="card-text text-primary fw-semibold">
+                @Model.ProductPrice.ToString("C", new System.Globalization.CultureInfo("en-IN"))
+            </p>
+
+            <!-- Action Buttons -->
+            <div class="d-grid gap-2">
+                @if (Session["userID"] == null)
+                {
+                    <a href="@Url.Action("Login", "Account")" class="btn btn-primary" aria-label="Login to Add @Model.ProductName to Cart">
+                        <i class="bi bi-cart-plus"></i> Add To Cart
+                    </a>
+                }
+                else
+                {
+                    <a href="@Url.Action("AddToCart", "Product", new { productID = Model.ProductID, userID = Session["userID"] })" class="btn btn-primary" id="addToCartBtn" aria-label="Add @Model.ProductName to Cart">
+                        <i class="bi bi-cart-plus"></i> Add To Cart
+                        <span id="loadingSpinner" class="spinner-border spinner-border-sm d-none" role="status" aria-hidden="true"></span>
+                    </a>
+                }
+                <a href="@Url.Action("ProductDetail", "Product", new { id = Model.ProductID })" class="btn btn-outline-primary" aria-label="View Details of @Model.ProductName">
+                    View Details
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    document.getElementById("addToCartBtn")?.addEventListener("click", function () {
+        this.disabled = true;
+        document.getElementById("loadingSpinner").classList.remove("d-none");
+    });
+</script>

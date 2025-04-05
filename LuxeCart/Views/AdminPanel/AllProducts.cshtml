@@ -1,0 +1,71 @@
+﻿@model IEnumerable<LuxeCart.Models.Product>
+
+@{
+    ViewBag.Title = "All Products";
+    Layout = "~/Views/Shared/_AdminPanelLayoutPage.cshtml";
+}
+@if (TempData["UpdateSuccess"] != null)
+{
+    <div class="alert alert-success alert-dismissible fade show" role="alert">
+        @TempData["UpdateSuccess"]
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+}
+@if (TempData["DeleteSuccess"] != null)
+{
+    <div class="alert alert-danger alert-dismissible fade show" role="alert">
+        @TempData["DeleteSuccess"]
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+}
+@if (TempData["DeleteError"] != null)
+{
+    <div class="alert alert-danger alert-dismissible fade show" role="alert">
+        @TempData["DeleteError"]
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+}
+<div class="container-fluid">
+    <h2 class="mt-4 mb-4 text-center">All Products</h2> <!-- Centered Heading -->
+
+    <table class="table table-bordered table-striped text-center">
+        <!-- Applied text-center to the table -->
+        <thead class="thead-dark">
+            <tr>
+                <th>No.</th>
+                @*<th>Product ID</th>*@
+                <th>Product Name</th>
+                <th>Company</th>
+                <th>Price</th>
+                <th>Stock Quantity</th>
+                <th>Available</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        @{ 
+            var count = 1;
+        }
+        <tbody>
+            @foreach (var product in Model)
+            {
+                <tr>
+                    <td>@count</td>
+                    @*<td>@product.ProductID</td>*@
+                    <td>@product.ProductName</td>
+                    <td>@product.ProductCompany</td>
+                    <td>@product.ProductPrice.ToString("C", new System.Globalization.CultureInfo("en-IN"))</td>
+                    <td>@product.ProductQuantity</td>
+                    <td>
+                        @product.IsAvailable
+                    </td>
+                    <td>
+                        <a href="@Url.Action("ProductDetail", "AdminPanel", new { ProductID = product.ProductID })" class="btn btn-sm btn-info">View</a>
+                        <a href="@Url.Action("EditProduct", "AdminPanel", new { ProductID = product.ProductID })" class="btn btn-sm btn-warning">Edit</a>
+                        <a href="@Url.Action("DeleteProduct", "AdminPanel", new { ProductID = product.ProductID })" class="btn btn-sm btn-danger" onclick="return confirm('Are you sure you want to delete this product?');">Delete</a>
+                    </td>
+                </tr>
+                count++;
+            }
+        </tbody>
+    </table>
+</div>

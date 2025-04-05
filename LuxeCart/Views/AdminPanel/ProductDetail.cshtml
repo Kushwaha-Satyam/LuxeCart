@@ -1,0 +1,65 @@
+﻿@model LuxeCart.Models.Product
+
+@{
+    ViewBag.Title = "Product Detail";
+    Layout = "~/Views/Shared/_AdminPanelLayoutPage.cshtml";
+}
+<div class="container">
+    <h4>Product Information</h4>
+    <hr />
+    <dl class="row">
+        <dt class="col-sm-3">@Html.DisplayNameFor(model => model.ProductName)</dt>
+        <dd class="col-sm-9">@Html.DisplayFor(model => model.ProductName)</dd>
+
+        <dt class="col-sm-3">@Html.DisplayNameFor(model => model.ProductCompany)</dt>
+        <dd class="col-sm-9">@Html.DisplayFor(model => model.ProductCompany)</dd>
+
+        <dt class="col-sm-3">@Html.DisplayNameFor(model => model.ProductDescription)</dt>
+        <dd class="col-sm-9">@Html.DisplayFor(model => model.ProductDescription)</dd>
+
+        <dt class="col-sm-3">@Html.DisplayNameFor(model => model.ProductPrice)</dt>
+        <dd class="col-sm-9">@Model.ProductPrice.ToString("C", new System.Globalization.CultureInfo("en-IN"))</dd>
+
+        <dt class="col-sm-3">@Html.DisplayNameFor(model => model.ProductQuantity)</dt>
+        <dd class="col-sm-9">@Html.DisplayFor(model => model.ProductQuantity)</dd>
+
+        <dt class="col-sm-3">Product Image</dt>
+        <dd class="col-sm-9 border-1">
+            <img src="@(string.IsNullOrEmpty(Model.ProductImageUrl) ? Url.Content("~/ProductImages/Model.ProductImageUrl") : Model.ProductImageUrl)"
+                 alt="@Model.ProductName"
+                 style="max-width: 200px; height: auto; border-radius: 5px;"
+                 onerror="this.onerror=null; this.src='/images/default-product.png';" />
+        </dd>
+          
+        <dt class="col-sm-3">@Html.DisplayNameFor(model => model.Category)</dt>
+        @if (Model.CategoryID == 1)
+        {
+            <dd class="col-sm-9">Electronics</dd>
+        }
+        else if (Model.CategoryID == 2)
+        {
+            <dd class="col-sm-9">Fashion</dd>
+        }
+        else if (Model.CategoryID == 3)
+        {
+            <dd class="col-sm-9">Home and Living</dd>
+        }
+        else
+        {
+            <dd class="col-sm-9">Other</dd>
+        }
+        <dt class="col-sm-3">@Html.DisplayNameFor(model => model.CreatedDate)</dt>
+        <dd class="col-sm-9">@Model.CreatedDate.ToString()</dd>
+
+        <dt class="col-sm-3">@Html.DisplayNameFor(model => model.IsAvailable)</dt>
+        <dd class="col-sm-9">
+            @Model.IsAvailable
+        </dd>
+    </dl>
+    <p>
+        @Html.ActionLink("Edit", "EditProduct", new { id = Model.ProductID }, new { @class = "btn btn-warning" })
+        @Html.ActionLink("Back to List", "AllProducts", null, new { @class = "btn btn-secondary" })
+    </p>
+</div>
+
+

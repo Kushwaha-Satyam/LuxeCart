@@ -1,0 +1,11 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_AdminPanelLayoutPage.cshtml";
+}
+
+@{
+    var userRole = ViewBag.UserRole as string;
+}
+
+<h2>Welcome to the @userRole Panel!</h2>

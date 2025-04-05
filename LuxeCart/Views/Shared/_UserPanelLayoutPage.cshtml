@@ -1,0 +1,682 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="LuxeCart - Your premier destination for luxury shopping with premium products and unmatched service">
+    <meta name="keywords" content="luxury shopping, premium products, online store, ecommerce">
+    <meta name="theme-color" content="#4e54c8">
+    <title>LuxeCart - Premium Shopping Experience</title>
+
+    <!-- Preload critical assets -->
+    <link rel="preload" href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" as="style">
+    <link rel="preload" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" as="style">
+
+    <!-- Stylesheets -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.2/font/bootstrap-icons.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css">
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" href="/favicon.png">
+
+    <!-- App manifest -->
+    <link rel="manifest" href="/manifest.json">
+
+    <style>
+        /* CSS Custom Properties */
+        :root {
+            /* Colors */
+            --color-primary: #4e54c8;
+            --color-secondary: #8f94fb;
+            --color-accent: #ff6b6b;
+            --color-text: #2d3436;
+            --color-light: #f8f9fa;
+            --color-dark: #212529;
+            --color-success: #28a745;
+            --color-warning: #ffc107;
+            --color-danger: #dc3545;
+            --color-info: #17a2b8;
+            /* Gradients */
+            --gradient-primary: linear-gradient(45deg, var(--color-primary), var(--color-secondary));
+            --gradient-dark: linear-gradient(to right, #2c3e50, #3498db);
+            /* Spacing */
+            --spacing-xs: 0.25rem;
+            --spacing-sm: 0.5rem;
+            --spacing-md: 1rem;
+            --spacing-lg: 1.5rem;
+            --spacing-xl: 2rem;
+            /* Transitions */
+            --transition-fast: 0.2s ease;
+            --transition-base: 0.3s ease;
+            --transition-slow: 0.5s ease;
+            /* Shadows */
+            --shadow-sm: 0 2px 4px rgba(0,0,0,0.1);
+            --shadow-md: 0 4px 6px rgba(0,0,0,0.1);
+            --shadow-lg: 0 10px 15px rgba(0,0,0,0.1);
+            /* Border Radius */
+            --radius-sm: 0.25rem;
+            --radius-md: 0.5rem;
+            --radius-lg: 1rem;
+            --radius-full: 9999px;
+        }
+
+        /* Base Styles */
+        html {
+            scroll-behavior: smooth;
+            font-size: 16px;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            color: var(--color-text);
+            line-height: 1.6;
+            overflow-x: hidden;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+
+        /* Layout Components */
+        .container {
+            max-width: 1280px;
+            margin: 0 auto;
+            padding: 0 var(--spacing-md);
+        }
+
+        /* Header & Navigation */
+        .top-bar {
+            background: var(--gradient-primary);
+            padding: var(--spacing-sm) 0;
+            font-size: 0.9rem;
+        }
+
+        .navbar {
+            padding: var(--spacing-md) 0;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            transition: var(--transition-base);
+        }
+
+            .navbar.scrolled {
+                box-shadow: var(--shadow-md);
+            }
+
+        .navbar-brand {
+            font-size: 1.75rem;
+            font-weight: 700;
+            letter-spacing: -0.5px;
+            transition: var(--transition-base);
+        }
+
+        /* Navigation Links */
+        .nav-link {
+            position: relative;
+            font-weight: 500;
+            padding: var(--spacing-sm) var(--spacing-md);
+            transition: var(--transition-base);
+        }
+
+            .nav-link::after {
+                content: '';
+                position: absolute;
+                bottom: 0;
+                left: 50%;
+                width: 0;
+                height: 2px;
+                background: var(--gradient-primary);
+                transition: var(--transition-base);
+                transform: translateX(-50%);
+                border-radius: var(--radius-full);
+            }
+
+            .nav-link:hover::after {
+                width: 80%;
+            }
+
+        /* Search Bar */
+        .search-bar {
+            max-width: 500px;
+            margin: 0 auto;
+        }
+
+            .search-bar input {
+                border-radius: var(--radius-full) 0 0 var(--radius-full);
+                border: 2px solid var(--color-light);
+                padding: 0.75rem 1.5rem;
+                transition: var(--transition-base);
+            }
+
+                .search-bar input:focus {
+                    border-color: var(--color-primary);
+                    box-shadow: 0 0 0 4px rgba(78, 84, 200, 0.1);
+                }
+
+            .search-bar button {
+                border-radius: 0 var(--radius-full) var(--radius-full) 0;
+                padding: 0.75rem 1.5rem;
+            }
+
+        /* Buttons */
+        .btn {
+            padding: 0.75rem 1.5rem;
+            font-weight: 500;
+            letter-spacing: 0.5px;
+            transition: var(--transition-base);
+            border-radius: var(--radius-full);
+        }
+
+        .btn-primary {
+            background: var(--gradient-primary);
+            border: none;
+            box-shadow: var(--shadow-sm);
+        }
+
+            .btn-primary:hover {
+                transform: translateY(-2px);
+                box-shadow: var(--shadow-md);
+            }
+
+        /* Cards & Hover Effects */
+        .card {
+            border: none;
+            border-radius: var(--radius-lg);
+            transition: var(--transition-base);
+            overflow: hidden;
+        }
+
+            .card:hover {
+                transform: translateY(-5px);
+                box-shadow: var(--shadow-lg);
+            }
+
+        /* Footer */
+        footer {
+            background: var(--gradient-dark);
+            color: white;
+            padding: var(--spacing-xl) 0 var(--spacing-md);
+            margin-top: auto;
+        }
+
+        .footer-heading {
+            font-size: 1.25rem;
+            font-weight: 600;
+            margin-bottom: var(--spacing-lg);
+        }
+
+        .footer-link {
+            color: rgba(255, 255, 255, 0.8);
+            text-decoration: none;
+            transition: var(--transition-base);
+            display: inline-block;
+            margin-bottom: var(--spacing-sm);
+        }
+
+            .footer-link:hover {
+                color: white;
+                transform: translateX(5px);
+            }
+
+        /* Social Links */
+        .social-links a {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            border-radius: var(--radius-full);
+            background: rgba(255, 255, 255, 0.1);
+            color: white;
+            transition: var(--transition-base);
+            margin-right: var(--spacing-sm);
+        }
+
+            .social-links a:hover {
+                background: var(--color-accent);
+                transform: translateY(-3px);
+            }
+
+        /* Responsive Design */
+        @@media (max-width: 992px) {
+            .navbar-collapse {
+                background: white;
+                padding: var(--spacing-md);
+                border-radius: var(--radius-lg);
+                box-shadow: var(--shadow-lg);
+                margin-top: var(--spacing-sm);
+            }
+
+            .search-bar {
+                width: 100%;
+                margin: var(--spacing-md) 0;
+            }
+        }
+
+        @@media (max-width: 768px) {
+            html {
+                font-size: 14px;
+            }
+
+            .top-bar {
+                text-align: center;
+            }
+
+            .footer-column {
+                margin-bottom: var(--spacing-xl);
+            }
+        }
+
+        /* Animations */
+        @@keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .animate-fadeInUp {
+            animation: fadeInUp 0.5s ease forwards;
+        }
+
+        /* Accessibility */
+        .visually-hidden {
+            position: absolute;
+            width: 1px;
+            height: 1px;
+            padding: 0;
+            margin: -1px;
+            overflow: hidden;
+            clip: rect(0,0,0,0);
+            border: 0;
+        }
+
+        /* Focus States */
+        a:focus,
+        button:focus,
+        input:focus {
+            outline: 3px solid var(--color-accent);
+            outline-offset: 2px;
+        }
+
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar {
+            width: 10px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: var(--color-light);
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: var(--color-primary);
+            border-radius: var(--radius-full);
+        }
+
+            ::-webkit-scrollbar-thumb:hover {
+                background: var(--color-secondary);
+            }
+
+        /* Registration Container */
+        .registration-container {
+            max-width: 500px;
+            margin: 50px auto;
+            padding: 20px;
+            border: 1px solid #ddd;
+            border-radius: 10px;
+            background-color: #f9f9f9;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+            .registration-container h2 {
+                text-align: center;
+                margin-bottom: 20px;
+                color: #333;
+            }
+
+        /* Form Group Styling */
+        .form-group {
+            margin-bottom: 15px;
+        }
+
+            .form-group label {
+                font-weight: bold;
+                margin-bottom: 5px;
+                display: block;
+            }
+
+        .form-control {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            font-size: 16px;
+        }
+
+        .form-control-file {
+            padding: 10px 0;
+        }
+
+        /* Validation Error Messages */
+        .text-danger {
+            color: #dc3545;
+            font-size: 14px;
+        }
+
+        /* Submit Button */
+        .btn-primary {
+            background-color: #007bff;
+            border: none;
+            padding: 10px;
+            font-size: 16px;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+            .btn-primary:hover {
+                background-color: #0056b3;
+            }
+
+        .btn-outline-primary.active {
+            background-color: #007bff;
+            color: #fff;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <!-- Top Bar -->
+        <div class="top-bar">
+            <div class="container">
+                <div class="row align-items-center">
+                    <div class="col-md-6">
+                        <span class="me-3">
+                            <i class="bi bi-telephone" aria-hidden="true"></i>
+                            <a href="tel:+15551234567" class="text-white text-decoration-none">+1 (555) 123-4567</a>
+                        </span>
+                        <span>
+                            <i class="bi bi-envelope" aria-hidden="true"></i>
+                            <a href="mailto:support@luxecart.com" class="text-white text-decoration-none">support@luxecart.com</a>
+                        </span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Navigation -->
+        <nav class="navbar navbar-expand-lg navbar-light sticky-top">
+            <div class="container">
+                @if (User.Identity.IsAuthenticated)
+                {
+                    <a class="navbar-brand" href="@Url.Action("Index","UserPanel")">
+                        <i class="bi bi-bag-heart-fill" aria-hidden="true"></i>
+                        <span class="ms-2">LuxeCart</span>
+                    </a>
+                }
+                else
+                {
+                    <a class="navbar-brand" href="@Url.Action("Index","Home")">
+                        <i class="bi bi-bag-heart-fill" aria-hidden="true"></i>
+                        <span class="ms-2">LuxeCart</span>
+                    </a>
+
+                }
+                <!-- Mobile Toggle -->
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarContent" aria-controls="navbarContent" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+
+                <!-- Navbar Content -->
+                <div class="collapse navbar-collapse" id="navbarContent">
+                    <!-- Search -->
+                    @*<form class="search-bar mx-lg-auto" role="search">
+                        <div class="input-group">
+                            <input type="search" class="form-control" placeholder="Search products..." aria-label="Search products">
+                            <button class="btn btn-primary" type="submit" aria-label="Submit search">
+                                <i class="bi bi-search" aria-hidden="true"></i>
+                            </button>
+                        </div>
+                    </form>*@
+
+                    <!-- Search Box -->
+                    <form action="@Url.Action("Search", "Home")" method="get" class="search-bar mx-lg-auto" role="search">
+                        <div class="input-group">
+                            <input class="form-control" type="search" name="searchTerm" placeholder="Search products..." aria-label="Search products">
+                            <button class="btn btn-primary" type="submit" aria-label="Submit search">
+                                <i class="bi bi-search" aria-hidden="true"></i>
+                            </button>
+                        </div>
+                    </form>
+
+                    <!-- Navigation Links -->
+                    <ul class="navbar-nav ms-auto">
+                        <li class="nav-item">
+                            @if (User.Identity.IsAuthenticated)
+                             {
+                            <a class="nav-link active" href="@Url.Action("Index","UserPanel")" aria-current="page">
+                                <i class="bi bi-house" aria-hidden="true"></i>
+                                <span class="ms-1">Home</span>
+                            </a>
+                             }
+                        else
+                          {
+                        <a class="nav-link active" href="@Url.Action("Index","Home")" aria-current="page">
+                            <i class="bi bi-house" aria-hidden="true"></i>
+                            <span class="ms-1">Home</span>
+                        </a>
+                           }
+                            
+                        </li>
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                <i class="bi bi-grid" aria-hidden="true"></i>
+                                <span class="ms-1">Categories</span>
+                            </a>
+                            <ul class="dropdown-menu animate-fadeInUp">
+                                <li>
+                                    <a class="dropdown-item" href="@(User.Identity.IsAuthenticated ? Url.Action("ProductByCategory", "Product", new {category = "Electronics"}) : "javascript:void(0);")"
+                                       onclick="@(User.Identity.IsAuthenticated ? "" : "alert('Please login to access Electronics.');")">
+                                        Electronics
+                                    </a>
+                                </li>
+                               <li>
+                                   <a class="dropdown-item" href="@(User.Identity.IsAuthenticated ? Url.Action("ProductByCategory", "Product", new {category = "Clothing"}) : "javascript:void(0);")"
+                                      onclick="@(User.Identity.IsAuthenticated ? "" : "alert('Please login to access Clothing.');")">
+                                       Clothing
+                                   </a>
+                               </li>
+                               <li>
+                                   <a class="dropdown-item" href="@(User.Identity.IsAuthenticated ? Url.Action("ProductByCategory", "Product", new {category = "HomeAndLiving"}) : "javascript:void(0);")"
+                                      onclick="@(User.Identity.IsAuthenticated ? "" : "alert('Please login to access Home and Living.');")">
+                                      Home and Living
+                                   </a>
+                               </li>
+                            </ul>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="@Url.Action("ViewCart", "Product", new {userId = Session["userID"]})" aria-label="Cart with 3 items">
+                                <i class="bi bi-cart3" aria-hidden="true"></i>
+                                <span class="ms-1">Cart</span>
+                            </a>
+                        </li>
+                        @if (User.Identity.IsAuthenticated)
+                        {
+                            <li class="nav-item dropdown">
+                                <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                    <i class="bi bi-person-circle" aria-hidden="true"></i>
+                                    <span class="ms-1">Account</span>
+                                </a>
+                                <ul class="dropdown-menu dropdown-menu-end animate-fadeInUp">
+                                    <!-- Display User Email -->
+                                    <li>
+                                        <div class="dropdown-item">
+                                            <strong>Email:</strong> @User.Identity.Name
+                                        </div>
+                                    </li>
+
+                                    <li><hr class="dropdown-divider"></li>
+
+                                    <!-- Logout Form -->
+                                    <li>
+                                        <form action="@Url.Action("Logout","Credentials")" method="post" onsubmit="return confirmLogout()">
+                                            @Html.AntiForgeryToken()
+                                            <button type="submit" class="dropdown-item text-danger">
+                                                <i class="bi bi-box-arrow-right" aria-hidden="true"></i>
+                                                <span class="ms-1">Logout</span>
+                                            </button>
+                                        </form>
+                                    </li>
+                                    <li><hr class="dropdown-divider"></li>
+
+                                    <!-- Profile Section Heading -->
+                                    <li class="text-center">
+                                        <div class="dropdown-item">
+                                            @{
+                                                var UserID = Session["userID"];
+                                            }
+                                            <a href="@Url.Action("UserDetail", "UserPanel", new { id = UserID })" class="btn btn-sm btn-info">Profile Details</a>
+                                        </div>
+                                    </li>
+                                </ul>
+
+                                <script>
+                                    function confirmLogout() {
+                                        return confirm("Are you sure you want to log out?");
+                                    }
+                                </script>
+                            </li>
+                        }
+                        else
+                        {
+                            <li class="nav-item">
+                                <a class="nav-link" href="@Url.Action("Login", "Credentials")">
+                                    <i class="bi bi-box-arrow-in-right"></i>
+                                    <span class="ms-1">Login</span>
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="@Url.Action("Register", "Credentials")">
+                                    <i class="bi bi-person-plus"></i>
+                                    <span class="ms-1">Sign Up</span>
+                                </a>
+                            </li>
+                        }
+                    </ul>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <main class="flex-grow-1">
+        <div class="container py-5">
+           @RenderBody()
+        </div>
+    </main>
+
+    <footer>
+        <div class="container">
+            <div class="row g-4">
+                <!-- Brand Column -->
+                <div class="col-lg-3 col-md-6">
+                    <div class="footer-column">
+                        <h3 class="footer-heading">
+                            <i class="bi bi-bag-heart-fill" aria-hidden="true"></i> LuxeCart
+                        </h3>
+                        <p class="mb-4">
+                            Your premier destination for luxury shopping. We bring you the finest products with unmatched service.
+                        </p>
+                        <div class="social-links">
+                            <a href="#" aria-label="Facebook">
+                                <i class="bi bi-facebook" aria-hidden="true"></i>
+                            </a>
+                            <a href="#" aria-label="Twitter">
+                                <i class="bi bi-twitter" aria-hidden="true"></i>
+                            </a>
+                            <a href="#" aria-label="Instagram">
+                                <i class="bi bi-instagram" aria-hidden="true"></i>
+                            </a>
+                            <a href="#" aria-label="Pinterest">
+                                <i class="bi bi-pinterest" aria-hidden="true"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Quick Links -->
+                <div class="col-lg-3 col-md-6">
+                    <div class="footer-column">
+                        <h5 class="footer-heading">Quick Links</h5>
+                        <ul class="list-unstyled">
+                            <li><a href="#" class="footer-link">About Us</a></li>
+                            <li><a href="#" class="footer-link">Contact Us</a></li>
+                            <li><a href="#" class="footer-link">Terms & Conditions</a></li>
+                            <li><a href="#" class="footer-link">Privacy Policy</a></li>
+                            <li><a href="#" class="footer-link">FAQs</a></li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Customer Service -->
+                <div class="col-lg-3 col-md-6">
+                    <div class="footer-column">
+                        <h5 class="footer-heading">Customer Service</h5>
+                        <ul class="list-unstyled">
+                            <li><a href="#" class="footer-link">My Account</a></li>
+                            <li><a href="#" class="footer-link">Track Order</a></li>
+                            <li><a href="#" class="footer-link">Wishlist</a></li>
+                            <li><a href="#" class="footer-link">Returns & Exchange</a></li>
+                            <li><a href="#" class="footer-link">Shipping Info</a></li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Newsletter -->
+                <div class="col-lg-3 col-md-6">
+                    <div class="footer-column">
+                        <h5 class="footer-heading">Newsletter</h5>
+                        <p>Subscribe to receive updates, access to exclusive deals, and more.</p>
+                        <form class="mb-3" aria-label="Newsletter subscription">
+                            <div class="input-group">
+                                <input type="email" class="form-control" placeholder="Enter your email" aria-label="Email for newsletter">
+                                <button class="btn btn-primary" type="submit">Subscribe</button>
+                            </div>
+                        </form>
+                        <div class="payment-methods" aria-label="Accepted payment methods">
+                            <i class="bi bi-credit-card fs-2 me-2" title="Credit Card" aria-hidden="true"></i>
+                            <i class="bi bi-paypal fs-2 me-2" title="PayPal" aria-hidden="true"></i>
+                            <i class="bi bi-wallet2 fs-2" title="Digital Wallet" aria-hidden="true"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <hr class="my-4">
+
+            <div class="row">
+                <div class="col-md-6 text-center text-md-start">
+                    <p class="mb-0">&copy; 2024 LuxeCart. All rights reserved.</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        // Navbar scroll effect
+        window.addEventListener('scroll', function () {
+            const navbar = document.querySelector('.navbar');
+            if (window.scrollY > 50) {
+                navbar.classList.add('scrolled');
+            } else {
+                navbar.classList.remove('scrolled');
+            }
+        });
+    </script>
+</body>
+</html>

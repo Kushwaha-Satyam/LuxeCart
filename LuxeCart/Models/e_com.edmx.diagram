@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="1feeb92617044ab19d034783020867d4" Name="Diagram1">
+        <EntityTypeShape EntityType="LuxeCartModel.Category" Width="1.5" PointX="0.75" PointY="1.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="LuxeCartModel.Product" Width="1.5" PointX="3" PointY="1" IsExpanded="true" />
+        <AssociationConnector Association="LuxeCartModel.FK_Product_Category" ManuallyRouted="false" />
+        <EntityTypeShape EntityType="LuxeCartModel.admin" Width="1.5" PointX="7.25" PointY="3.5" />
+        <EntityTypeShape EntityType="LuxeCartModel.RegisterUser" Width="1.5" PointX="5.25" PointY="3.5" />
+        <EntityTypeShape EntityType="LuxeCartModel.CartItem" Width="1.5" PointX="10.125" PointY="0.75" />
+        <EntityTypeShape EntityType="LuxeCartModel.Cart" Width="1.5" PointX="10.125" PointY="3.75" />
+        <AssociationConnector Association="LuxeCartModel.FK__CartItems__CartI__5165187F" />
+        <AssociationConnector Association="LuxeCartModel.FK__CartItems__Produ__52593CB8" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

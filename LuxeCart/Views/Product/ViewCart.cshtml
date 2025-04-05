@@ -1,0 +1,66 @@
+﻿@model LuxeCart.Models.Cart
+
+@{
+    ViewBag.Title = "ViewCart";
+    Layout = "~/Views/Shared/_UserPanelLayoutPage.cshtml";
+}
+
+@if (TempData["RemoveFromCartMessage"] != null)
+{
+    <div class="alert alert-success">@TempData["RemoveFromCartMessage"]</div>
+}
+<h2>Your Cart</h2>
+
+@if (Model.CartItems.Any())
+{
+    <table class="table">
+        <thead>
+            <tr>
+                <th>No.</th>
+                <th>Product Image</th>
+                <th>Product</th>
+                <th>Quantity</th>
+                <th>Price</th>
+                <th>Total</th>
+                <th>Action</th>
+            </tr>
+        </thead>
+        <tbody>
+            @{ var count = 1; }
+            @foreach (var item in Model.CartItems)
+            {
+                <tr>
+                    <td>@count</td>
+                    <td>
+                        <img src="@item.Product.ProductImageUrl" alt="@item.Product.ProductName" width="50" height="50" />
+                    </td>
+                    <td>@item.Product.ProductName</td>
+                    <td>@item.Quantity</td>
+                    <td>@item.Product.ProductPrice.ToString("C", new System.Globalization.CultureInfo("en-IN"))</td>
+                    <td>@((item.Quantity * item.Product.ProductPrice).ToString("C", new System.Globalization.CultureInfo("en-IN")))</td>
+                    <td>
+                        <a href="@Url.Action("RemoveFromCart", "Product", new { productID = item.ProductId , userID = Session["userID"]})" class="btn btn-danger btn-sm">Remove</a>
+                    </td>
+                </tr>
+                count++;
+            }
+        </tbody>
+        <tfoot>
+            <tr>
+                <td colspan="5" class="text-right"><strong>Grand Total:</strong></td>
+                <td><strong>@Model.CartItems.Sum(item => item.Quantity * item.Product.ProductPrice).ToString("C", new System.Globalization.CultureInfo("en-IN"))</strong></td>
+                <td></td>
+            </tr>
+        </tfoot>
+    </table>
+
+    <div class="text-end">
+        <a href="@Url.Action("Checkout", "Cart")" class="btn btn-primary">Proceed to Checkout</a>
+    </div>
+}
+else
+{
+    <div class="alert alert-info">
+        <strong>Your cart is empty.</strong> <a href="@Url.Action("Index", "Product")" class="alert-link">Continue shopping</a>.
+    </div>
+}
